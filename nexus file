@@ -17,5 +17,5 @@ WantedBy=multi-user.target
 
 
 
-wget-O nexus.tar.gz https://download.sonatype.com/nexus/3/latest-unix.tar.gz
+wget -O nexus.tar.gz https://download.sonatype.com/nexus/3/latest-unix.tar.gz
 
