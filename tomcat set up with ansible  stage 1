@@ -1,0 +1,21 @@
+---
+- hosts: dev
+  connection: ssh
+
+  tasks:
+   - namae: install java-1.8.0-openjdk
+     yum: name=java-1.8.0-openjdk state=present
+
+   - name: download the repo of dlcd.apache.org
+     get_url:
+         url: https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.95/bin/apache-tomcat-9.0.95.tar.gz
+         dest: /root
+
+   - name: untar the file
+     command: tar -zxvf apache-tomcat-9.0.95.tar.gz
+
+   - name: rename the file of tomcat
+     command: mv apache-tomcat-9.0.95 jack
+
+   - name: start the tomcat
+     shell: nohup /root/jack/bin/startup.sh
