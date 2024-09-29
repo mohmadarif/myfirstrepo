@@ -1,37 +1,29 @@
 ---
 - hosts: dev
   connection: ssh
-
   tasks:
-   - namae: install java-1.8.0-openjdk
-     yum: name=java-1.8.0-openjdk state=present
-
-   - name: download the repo of dlcd.apache.org
-     get_url:
-         url: https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.95/bin/apache-tomcat-9.0.95.tar.gz
-         dest: /root
-
-   - name: untar the file
-     command: tar -zxvf apache-tomcat-9.0.95.tar.gz
-
-   - name: rename the file of tomcat
-     command: mv apache-tomcat-9.0.95 jack
-     tags: abc
-   - name: start the tomcat
-     shell: nohup /root/jack/bin/startup.sh
-
-   - name: copy the file of context.xml 
-     copy:
-       src: /root/context.xml
-       dest: /root/jack/webapps/manager/META-INF/context.xml
-
-
-   - name: copy the file of tomcat-users.xml
-        copy:
-          src: /root/tomcat-users.xml
-          dest: /root/jack/conf/tomcat-users.xml
-   - name: stop the tomcat
-         shell: nohup /root/jack/bin/shutdown.sh
-  
+    - namae: install java-1.8.0-openjdk
+      yum: name=java-1.8.0-openjdk state=present
+    - name: download the repo of dlcd.apache.org
+      get_url:
+        url: https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.95/bin/apache-tomcat-9.0.95.tar.gz
+        dest: /root
+    - name: untar the file
+      command: tar -zxvf apache-tomcat-9.0.95.tar.gz
+    - name: rename the file of tomcat
+      command: mv apache-tomcat-9.0.95 jack
+      tags: abc
     - name: start the tomcat
-        shell: nohup /root/jack/bin/startup.sh
+      shell: nohup /root/jack/bin/startup.sh
+    - name: copy the file of context.xml
+      copy:
+        src: /root/context.xml
+        dest: /root/jack/webapps/manager/META-INF/context.xml
+    - name: copy the file of tomcat-users.xml
+      copy:
+        src: /root/tomcat-users.xml
+        dest: /root/jack/conf/tomcat-users.xml
+    - name: stop the tomcat
+      shell: nohup /root/jack/bin/shutdown.sh
+    - name: start the tomcat
+      shell: nohup /root/jack/bin/startup.sh
