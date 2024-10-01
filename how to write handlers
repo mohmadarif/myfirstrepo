@@ -1,0 +1,14 @@
+---
+- hosts: dev
+  connection: ssh
+
+  tasks:
+
+    - name: install java1.8.0
+      yum: name=java-1.8.0-openjdk state=present
+      notify: install maven
+
+  handlers:
+
+    - name: install maven
+      action: yum name=maven state=present
